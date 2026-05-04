@@ -253,6 +253,23 @@
 				transform: translateY(0);
 				filter: blur(0);
 			}
+			.fade-right {
+				opacity: 0;
+				transform: translateX(-40px);
+				transition:
+					opacity 0.8s ease,
+					transform 0.8s ease;
+			}
+			.fade-right.visible {
+				opacity: 1;
+				transform: translateX(0);
+			}
+			.fade-right.delay-1 {
+				transition-delay: 0.15s;
+			}
+			.fade-right.delay-2 {
+				transition-delay: 0.3s;
+			}
 			.type-target {
 				display: inline-block;
 				white-space: nowrap;
@@ -408,6 +425,36 @@
 			.image-modal-arrow.right {
 				right: 12px;
 			}
+			.whatsapp-float {
+				position: fixed;
+				right: 20px;
+				bottom: 20px;
+				z-index: 70;
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				padding: 12px 16px;
+				border-radius: 999px;
+				background: #25d366;
+				color: #ffffff;
+				font-weight: 700;
+				box-shadow: 0 14px 30px rgba(10, 110, 55, 0.35);
+				transition:
+					transform 0.25s ease,
+					box-shadow 0.25s ease;
+			}
+			.whatsapp-float:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 18px 36px rgba(10, 110, 55, 0.42);
+			}
+			.mobile-menu {
+				max-height: 0;
+				overflow: hidden;
+				transition: max-height 0.35s ease;
+			}
+			.mobile-menu.open {
+				max-height: 320px;
+			}
 		</style>
 	</head>
 	<body class="bg-surface font-body-md text-on-surface antialiased">
@@ -415,10 +462,16 @@
 		<header
 			class="bg-white/80 dark:bg-slate-950/80 backdrop-blur-md antialiased tracking-tight docked full-width top-0 sticky z-50 border-b border-blue-100 dark:border-slate-800 shadow-sm shadow-blue-900/5"
 		>
-			<div
-				class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto"
-			>
-				<div class="brand-badge">
+			<div class="relative flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+				<button
+					id="mobile-menu-toggle"
+					class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-blue-100 text-blue-800"
+					type="button"
+					aria-label="Toggle menu"
+				>
+					<span class="material-symbols-outlined">menu</span>
+				</button>
+				<div class="brand-badge md:static absolute left-1/2 -translate-x-1/2 md:translate-x-0">
 					<img class="logo-default" src="logo.png" alt="ABC LIS" />
 				</div>
 				<nav class="hidden md:flex items-center gap-8">
@@ -448,14 +501,17 @@
 						>Hubungi Kami</a
 					>
 				</nav>
-				<div class="flex items-center gap-4">
-					<button
-						class="bg-secondary text-on-secondary px-6 py-2 rounded-lg font-label-md hover:opacity-90 transition-all duration-200"
-					>
-						Sign In
-					</button>
-				</div>
+				<div class="w-10 h-10 md:hidden"></div>
 			</div>
+			<nav id="mobile-menu" class="mobile-menu md:hidden px-6 pb-4">
+				<div class="flex flex-col gap-3">
+					<a class="text-blue-800 font-semibold" href="#">Home</a>
+					<a class="text-slate-700" href="#specifications">Specifications</a>
+					<a class="text-slate-700" href="#features">Features</a>
+					<a class="text-slate-700" href="#aftersales">Aftersales</a>
+					<a class="text-slate-700" href="#contact">Hubungi Kami</a>
+				</div>
+			</nav>
 		</header>
 		<main>
 			<!-- Hero / Specification Section -->
@@ -632,9 +688,7 @@
 								class="material-symbols-outlined text-[48px] text-secondary"
 								>tablet_mac</span
 							>
-							<span class="font-label-md text-primary"
-								>Apple iOS</span
-							>
+							<span class="font-label-md text-primary">Tablet</span>
 						</div>
 						<div
 							class="flex flex-col items-center p-md space-y-sm grayscale hover:grayscale-0 transition-all"
@@ -835,7 +889,7 @@
 				<div
 					class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-xl items-center relative z-10"
 				>
-					<div class="space-y-lg">
+					<div class="space-y-lg fade-right delay-1">
 						<h2 class="font-h1 text-white">Dukungan Purna Jual</h2>
 						<div class="grid grid-cols-1 gap-md">
 							<div class="flex gap-md">
@@ -917,7 +971,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="relative">
+					<div class="relative fade-right delay-2">
 						<img
 							class="rounded-2xl shadow-2xl"
 							data-alt="A professional medical technology support team in a clean, modern office environment. They are equipped with high-end headsets and multiple monitors showing laboratory management dashboards. The lighting is bright and corporate, emphasizing a professional, reliable, and technologically advanced support structure with a soft UI blue aesthetic."
@@ -953,13 +1007,15 @@
 					<div
 						class="bg-white p-8 rounded-2xl shadow-sm border border-blue-100"
 					>
-						<form class="space-y-md">
+						<form class="space-y-md" id="consultation-form">
 							<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
 								<div class="space-y-xs">
 									<label class="font-label-md text-primary"
 										>Nama Lengkap</label
 									>
 									<input
+										id="full-name"
+										name="nama_lengkap"
 										class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all"
 										placeholder="Masukkan nama Anda"
 										type="text"
@@ -970,6 +1026,8 @@
 										>Nama RS / Laboratorium</label
 									>
 									<input
+										id="hospital-name"
+										name="nama_rs"
 										class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all"
 										placeholder="Nama Instansi"
 										type="text"
@@ -982,6 +1040,8 @@
 										>Email</label
 									>
 									<input
+										id="email-address"
+										name="email"
 										class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all"
 										placeholder="email@domain.com"
 										type="email"
@@ -992,6 +1052,8 @@
 										>Nomor Telepon</label
 									>
 									<input
+										id="phone-number"
+										name="nomor_telepon"
 										class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all"
 										placeholder="Contoh: 08123456789"
 										type="tel"
@@ -1003,6 +1065,8 @@
 									>Pesan Anda</label
 								>
 								<textarea
+									id="message-text"
+									name="pesan"
 									class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all resize-none"
 									placeholder="Tuliskan kebutuhan atau pertanyaan Anda..."
 									rows="4"
@@ -1167,8 +1231,19 @@
 				<img id="image-modal-preview" src="" alt="Preview Dokumentasi" />
 			</div>
 		</div>
+		<a
+			class="whatsapp-float"
+			href="https://wa.me/6282144008599?text=Halo%2C%20Admin%20saya%20ingin%20konsultasi%20mengenai%20LIS."
+			target="_blank"
+			rel="noopener noreferrer"
+			aria-label="Chat WhatsApp Admin"
+		>
+			<span class="material-symbols-outlined">chat</span>
+			<span>WhatsApp</span>
+		</a>
 		<script>
 			const revealItems = document.querySelectorAll(".reveal-item");
+			const fadeRightItems = document.querySelectorAll(".fade-right");
 			const observer = new IntersectionObserver(
 				(entries) => {
 					entries.forEach((entry) => {
@@ -1181,6 +1256,13 @@
 				{ threshold: 0.16 }
 			);
 			revealItems.forEach((item) => observer.observe(item));
+			fadeRightItems.forEach((item) => observer.observe(item));
+
+			const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+			const mobileMenu = document.getElementById("mobile-menu");
+			mobileMenuToggle?.addEventListener("click", () => {
+				mobileMenu?.classList.toggle("open");
+			});
 
 			const typeTargets = document.querySelectorAll("[data-type-text]");
 			typeTargets.forEach((el) => {
@@ -1332,6 +1414,27 @@
 				if (event.key === "ArrowRight") {
 					openModalByIndex(activeImageIndex + 1);
 				}
+			});
+
+			const consultationForm = document.getElementById("consultation-form");
+			consultationForm?.addEventListener("submit", (event) => {
+				event.preventDefault();
+				const namaLengkap = document.getElementById("full-name")?.value.trim() || "-";
+				const namaRs = document.getElementById("hospital-name")?.value.trim() || "-";
+				const email = document.getElementById("email-address")?.value.trim() || "-";
+				const nomorTelepon = document.getElementById("phone-number")?.value.trim() || "-";
+				const pesan = document.getElementById("message-text")?.value.trim() || "-";
+				const whatsappNumber = "6282144008599";
+
+				const whatsappText =
+					"Halo Admin, saya ingin konsultasi mengenai LIS.%0A%0A" +
+					`Nama Lengkap: ${encodeURIComponent(namaLengkap)}%0A` +
+					`Nama RS / Laboratorium: ${encodeURIComponent(namaRs)}%0A` +
+					`Email: ${encodeURIComponent(email)}%0A` +
+					`Nomor Telepon: ${encodeURIComponent(nomorTelepon)}%0A` +
+					`Pesan: ${encodeURIComponent(pesan)}`;
+
+				window.open(`https://wa.me/${whatsappNumber}?text=${whatsappText}`, "_blank");
 			});
 		</script>
 	</body>
