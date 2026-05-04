@@ -1,0 +1,1340 @@
+<!doctype html>
+
+<html class="scroll-smooth" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<title>ABC LIS | Precision Laboratory Information System</title>
+		<link rel="icon" type="image/png" href="logo.png" />
+		<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+			rel="stylesheet"
+		/>
+		<script id="tailwind-config">
+			tailwind.config = {
+				darkMode: "class",
+				theme: {
+					extend: {
+						colors: {
+							"on-primary-fixed": "#041a3f",
+							"on-surface-variant": "#44464e",
+							"secondary-container": "#206bf8",
+							"inverse-surface": "#303033",
+							secondary: "#0053cf",
+							"on-error-container": "#93000a",
+							"on-secondary": "#ffffff",
+							"inverse-primary": "#b4c6f4",
+							"inverse-on-surface": "#f2f0f4",
+							"tertiary-fixed": "#dae2ff",
+							"on-tertiary-fixed": "#001946",
+							"on-primary-fixed-variant": "#34466d",
+							"surface-dim": "#dbd9dd",
+							"tertiary-container": "#001d50",
+							background: "#fbf8fc",
+							"on-tertiary-fixed-variant": "#00419e",
+							"error-container": "#ffdad6",
+							surface: "#fbf8fc",
+							"on-secondary-container": "#fefcff",
+							"surface-variant": "#e4e2e5",
+							"on-primary": "#ffffff",
+							"surface-container": "#efedf1",
+							"on-surface": "#1b1b1e",
+							"primary-fixed": "#d9e2ff",
+							"on-background": "#1b1b1e",
+							"on-primary-container": "#7687b2",
+							"primary-fixed-dim": "#b4c6f4",
+							"on-tertiary-container": "#4682ff",
+							error: "#ba1a1a",
+							primary: "#00081e",
+							outline: "#75777f",
+							"tertiary-fixed-dim": "#b1c5ff",
+							"surface-container-highest": "#e4e2e5",
+							tertiary: "#000720",
+							"on-secondary-fixed-variant": "#003fa3",
+							"surface-tint": "#4c5e86",
+							"secondary-fixed": "#dae2ff",
+							"surface-container-high": "#e9e7eb",
+							"surface-bright": "#fbf8fc",
+							"on-secondary-fixed": "#001848",
+							"on-error": "#ffffff",
+							"surface-container-low": "#f5f3f7",
+							"surface-container-lowest": "#ffffff",
+							"on-tertiary": "#ffffff",
+							"secondary-fixed-dim": "#b2c5ff",
+							"primary-container": "#0a1f44",
+							"outline-variant": "#c5c6cf",
+						},
+						borderRadius: {
+							DEFAULT: "0.25rem",
+							lg: "0.5rem",
+							xl: "0.75rem",
+							full: "9999px",
+						},
+						spacing: {
+							xs: "4px",
+							lg: "48px",
+							sm: "12px",
+							md: "24px",
+							base: "8px",
+							"container-max": "1440px",
+							gutter: "24px",
+							xl: "80px",
+						},
+						fontFamily: {
+							h2: ["Space Grotesk", "sans-serif"],
+							"label-md": ["Space Grotesk", "sans-serif"],
+							"body-md": ["Manrope", "sans-serif"],
+							"body-lg": ["Manrope", "sans-serif"],
+							h3: ["Space Grotesk", "sans-serif"],
+							h1: ["Space Grotesk", "sans-serif"],
+							"display-lg": ["Space Grotesk", "sans-serif"],
+							"body-sm": ["Manrope", "sans-serif"],
+							"data-tabular": ["Manrope", "sans-serif"],
+						},
+						fontSize: {
+							h2: [
+								"24px",
+								{ lineHeight: "1.4", fontWeight: "600" },
+							],
+							"label-md": [
+								"12px",
+								{
+									lineHeight: "1.2",
+									letterSpacing: "0.05em",
+									fontWeight: "600",
+								},
+							],
+							"body-md": [
+								"16px",
+								{ lineHeight: "1.6", fontWeight: "400" },
+							],
+							"body-lg": [
+								"18px",
+								{ lineHeight: "1.6", fontWeight: "400" },
+							],
+							h3: [
+								"20px",
+								{ lineHeight: "1.4", fontWeight: "600" },
+							],
+							h1: [
+								"32px",
+								{ lineHeight: "1.3", fontWeight: "700" },
+							],
+							"display-lg": [
+								"48px",
+								{
+									lineHeight: "1.2",
+									letterSpacing: "-0.02em",
+									fontWeight: "700",
+								},
+							],
+							"body-sm": [
+								"14px",
+								{ lineHeight: "1.5", fontWeight: "400" },
+							],
+							"data-tabular": [
+								"14px",
+								{ lineHeight: "1.4", fontWeight: "500" },
+							],
+						},
+					},
+				},
+			};
+		</script>
+		<style>
+			:root {
+				--hero-gradient-a: #022965;
+				--hero-gradient-b: #0f53d4;
+				--hero-gradient-c: #03c5ff;
+			}
+			body {
+				letter-spacing: 0.01em;
+				line-height: 1.65;
+			}
+			h1,
+			h2,
+			h3,
+			h4 {
+				letter-spacing: -0.015em;
+			}
+			.glass-card {
+				background: rgba(255, 255, 255, 0.7);
+				backdrop-filter: blur(12px);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				transition:
+					transform 0.45s ease,
+					box-shadow 0.45s ease;
+			}
+			.floating-card {
+				animation: floatCard 4.8s ease-in-out infinite;
+			}
+			.floating-card:nth-child(2) {
+				animation-delay: 0.35s;
+			}
+			.floating-card:nth-child(3) {
+				animation-delay: 0.7s;
+			}
+			.floating-card:nth-child(4) {
+				animation-delay: 1.05s;
+			}
+			.floating-card:nth-child(5) {
+				animation-delay: 1.4s;
+			}
+			.glass-card:hover {
+				transform: translateY(-6px);
+				box-shadow: 0 20px 45px rgba(3, 40, 112, 0.24);
+			}
+			.brand-badge {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0;
+				background: transparent;
+				border: 0;
+			}
+			.logo-default {
+				height: 48px;
+				width: auto;
+			}
+			.material-symbols-outlined {
+				font-variation-settings:
+					"FILL" 0,
+					"wght" 400,
+					"GRAD" 0,
+					"opsz" 24;
+			}
+			.hero-glow {
+				background:
+					radial-gradient(
+						circle at 12% 20%,
+						rgba(3, 197, 255, 0.3),
+						transparent 40%
+					),
+					radial-gradient(
+						circle at 80% 10%,
+						rgba(15, 83, 212, 0.25),
+						transparent 35%
+					);
+				animation: pulseGlow 6s ease-in-out infinite;
+			}
+			.hero-bg {
+				background-image: url("unnamed.png");
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+				will-change: background-position;
+			}
+			.gradient-title {
+				background: linear-gradient(90deg, var(--hero-gradient-c), #7bc3ff, #ffffff);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+			.reveal-item {
+				opacity: 0;
+				transform: translateY(36px);
+				filter: blur(6px);
+				transition:
+					opacity 0.75s ease,
+					transform 0.75s ease,
+					filter 0.75s ease;
+			}
+			.reveal-item.visible {
+				opacity: 1;
+				transform: translateY(0);
+				filter: blur(0);
+			}
+			.type-target {
+				display: inline-block;
+				white-space: nowrap;
+				overflow: hidden;
+				max-width: 100%;
+				vertical-align: bottom;
+				border-right: 2px solid rgba(255, 255, 255, 0.9);
+				animation: caretBlink 0.7s steps(1) infinite;
+			}
+			.spec-title {
+				font-size: clamp(2rem, 4.2vw, 3.8rem);
+				line-height: 1.12;
+				letter-spacing: -0.01em;
+			}
+			.spec-desc {
+				font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+				line-height: 1.58;
+				letter-spacing: 0.005em;
+			}
+			.spec-card-title {
+				font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+				line-height: 1.32;
+				letter-spacing: -0.01em;
+			}
+			.spec-card-desc {
+				font-size: clamp(0.9rem, 0.98vw, 1.02rem);
+				line-height: 1.52;
+				color: #374151;
+			}
+			@keyframes pulseGlow {
+				0%,
+				100% {
+					opacity: 0.75;
+				}
+				50% {
+					opacity: 1;
+				}
+			}
+			@keyframes caretBlink {
+				0%,
+				49% {
+					border-right-color: rgba(255, 255, 255, 0.95);
+				}
+				50%,
+				100% {
+					border-right-color: transparent;
+				}
+			}
+			@keyframes floatCard {
+				0%,
+				100% {
+					transform: translateY(0);
+					box-shadow: 0 10px 25px rgba(2, 42, 110, 0.14);
+				}
+				50% {
+					transform: translateY(-8px);
+					box-shadow: 0 20px 36px rgba(2, 42, 110, 0.2);
+				}
+			}
+			.doc-card {
+				background: rgba(255, 255, 255, 0.92);
+				border: 1px solid rgba(255, 255, 255, 0.34);
+				backdrop-filter: blur(8px);
+				transition:
+					transform 0.55s ease,
+					box-shadow 0.55s ease;
+				transform-style: preserve-3d;
+				cursor: pointer;
+			}
+			.doc-card:hover {
+				transform: perspective(900px) rotateY(10deg) rotateX(4deg) translateY(-10px) scale(1.02);
+				box-shadow: 0 22px 44px rgba(9, 35, 89, 0.26);
+			}
+			.doc-image {
+				aspect-ratio: 16 / 10;
+				width: 100%;
+				object-fit: cover;
+			}
+			.doc-nav {
+				background: rgba(255, 255, 255, 0.18);
+				border: 1px solid rgba(255, 255, 255, 0.35);
+				transition: transform 0.25s ease;
+			}
+			.doc-nav:hover {
+				transform: translateY(-2px);
+			}
+			.image-modal {
+				position: fixed;
+				inset: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 20px;
+				background: rgba(2, 10, 29, 0.82);
+				backdrop-filter: blur(5px);
+				z-index: 80;
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 0.3s ease;
+			}
+			.image-modal.active {
+				opacity: 1;
+				pointer-events: auto;
+			}
+			.image-modal-panel {
+				position: relative;
+				max-width: min(1100px, 96vw);
+				max-height: 90vh;
+				border-radius: 16px;
+				overflow: hidden;
+				box-shadow: 0 28px 68px rgba(0, 0, 0, 0.45);
+				transform: translateY(24px) scale(0.95);
+				transition: transform 0.35s ease;
+			}
+			.image-modal.active .image-modal-panel {
+				transform: translateY(0) scale(1);
+			}
+			.image-modal-panel img {
+				width: 100%;
+				height: 100%;
+				max-height: 90vh;
+				object-fit: contain;
+				background: #0a1f44;
+			}
+			.image-modal-close {
+				position: absolute;
+				top: 12px;
+				right: 12px;
+				width: 38px;
+				height: 38px;
+				border-radius: 999px;
+				border: 1px solid rgba(255, 255, 255, 0.55);
+				background: rgba(2, 17, 52, 0.52);
+				color: #fff;
+				font-size: 22px;
+			}
+			.image-modal-arrow {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 44px;
+				height: 44px;
+				border-radius: 999px;
+				border: 1px solid rgba(255, 255, 255, 0.55);
+				background: rgba(2, 17, 52, 0.52);
+				color: #fff;
+				font-size: 26px;
+				line-height: 1;
+			}
+			.image-modal-arrow.left {
+				left: 12px;
+			}
+			.image-modal-arrow.right {
+				right: 12px;
+			}
+		</style>
+	</head>
+	<body class="bg-surface font-body-md text-on-surface antialiased">
+		<!-- TopNavBar -->
+		<header
+			class="bg-white/80 dark:bg-slate-950/80 backdrop-blur-md antialiased tracking-tight docked full-width top-0 sticky z-50 border-b border-blue-100 dark:border-slate-800 shadow-sm shadow-blue-900/5"
+		>
+			<div
+				class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto"
+			>
+				<div class="brand-badge">
+					<img class="logo-default" src="logo.png" alt="ABC LIS" />
+				</div>
+				<nav class="hidden md:flex items-center gap-8">
+					<a
+						class="text-blue-700 dark:text-blue-300 font-semibold border-b-2 border-blue-700"
+						href="#"
+						>Home</a
+					>
+					<a
+						class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors"
+						href="#specifications"
+						>Specifications</a
+					>
+					<a
+						class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors"
+						href="#features"
+						>Features</a
+					>
+					<a
+						class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors"
+						href="#aftersales"
+						>Aftersales</a
+					>
+					<a
+						class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors"
+						href="#contact"
+						>Hubungi Kami</a
+					>
+				</nav>
+				<div class="flex items-center gap-4">
+					<button
+						class="bg-secondary text-on-secondary px-6 py-2 rounded-lg font-label-md hover:opacity-90 transition-all duration-200"
+					>
+						Sign In
+					</button>
+				</div>
+			</div>
+		</header>
+		<main>
+			<!-- Hero / Specification Section -->
+			<section
+				class="relative min-h-[921px] flex items-center overflow-hidden py-xl"
+				id="specifications"
+			>
+				<div class="absolute inset-0 z-0">
+					<div class="absolute inset-0 hero-bg" id="hero-parallax"></div>
+					<div
+						class="absolute inset-0 bg-gradient-to-r from-[#000b28]/95 via-[#032870]/80 to-transparent"
+					></div>
+					<div class="absolute inset-0 hero-glow"></div>
+				</div>
+				<div
+					class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+				>
+					<div class="text-white space-y-md reveal-item">
+						<span
+							class="font-label-md tracking-[0.2em] text-secondary-container uppercase text-lg md:text-2xl"
+							><span class="type-target" data-type-text="Laboratorium Modern"></span></span
+						>
+						<h1 class="font-display-lg text-white leading-tight spec-title">
+							<span class="type-target gradient-title" data-type-text="ABC-LIS SPESIFIKASI" data-type-delay="500"></span>
+						</h1>
+						<p class="font-body-lg text-blue-100/80 max-w-xl spec-desc">
+							Sistem Informasi Laboratorium terintegrasi dengan
+							teknologi mutakhir untuk menjamin presisi dan
+							efisiensi diagnostik Anda.
+						</p>
+					</div>
+					<div class="grid grid-cols-1 gap-4 reveal-item">
+						<div
+							class="glass-card floating-card p-6 rounded-xl border-l-4 border-l-secondary-container"
+						>
+							<div class="flex gap-4 items-start">
+								<span
+									class="material-symbols-outlined text-secondary-container"
+									>code</span
+								>
+								<div>
+									<h3 class="font-h3 text-primary spec-card-title">
+										SYSTEM WEB BASED
+									</h3>
+									<p
+										class="font-body-sm text-on-surface-variant spec-card-desc"
+									>
+										Interface modern tanpa instalasi,
+										integrasi standar medis internasional,
+										dan sinkronisasi data real-time.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div
+							class="glass-card floating-card p-6 rounded-xl border-l-4 border-l-secondary-container"
+						>
+							<div class="flex gap-4 items-start">
+								<span
+									class="material-symbols-outlined text-secondary-container"
+									>dns</span
+								>
+								<div>
+									<h3 class="font-h3 text-primary spec-card-title">
+										SERVER LOCAL/ONLINE
+									</h3>
+									<p
+										class="font-body-sm text-on-surface-variant spec-card-desc"
+									>
+										Deployment flexible pada Local IP
+										Intranet maupun Online Website.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div
+							class="glass-card floating-card p-6 rounded-xl border-l-4 border-l-secondary-container"
+						>
+							<div class="flex gap-4 items-start">
+								<span
+									class="material-symbols-outlined text-secondary-container"
+									>database</span
+								>
+								<div>
+									<h3 class="font-h3 text-primary spec-card-title">
+										DATABASE
+									</h3>
+									<p
+										class="font-body-sm text-on-surface-variant spec-card-desc"
+									>
+										Kapasitas ribuan data dengan
+										sinkronisasi otomatis Local &amp; Cloud.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+							<div
+								class="glass-card floating-card p-6 rounded-xl border-l-4 border-l-secondary-container"
+							>
+								<div class="flex gap-4 items-start">
+									<span
+										class="material-symbols-outlined text-secondary-container"
+										>dashboard_customize</span
+									>
+									<div>
+										<h3 class="font-h3 text-primary spec-card-title">
+											CUSTOM
+										</h3>
+										<p
+											class="font-body-sm text-on-surface-variant spec-card-desc"
+										>
+											Laporan dan template bebas
+											kustomisasi.
+										</p>
+									</div>
+								</div>
+							</div>
+							<div
+								class="glass-card floating-card p-6 rounded-xl border-l-4 border-l-secondary-container"
+							>
+								<div class="flex gap-4 items-start">
+									<span
+										class="material-symbols-outlined text-secondary-container"
+										>shield</span
+									>
+									<div>
+										<h3 class="font-h3 text-primary spec-card-title">
+											SECURITY
+										</h3>
+										<p
+											class="font-body-sm text-on-surface-variant spec-card-desc"
+										>
+											Encryption, Firewall, &amp; Authentication
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Multi-Device Support -->
+			<section class="py-xl bg-surface-container-low reveal-item">
+				<div class="max-w-7xl mx-auto px-6 text-center space-y-lg">
+					<div class="max-w-2xl mx-auto">
+						<h2 class="font-h1 text-primary mb-md">
+							Akses dari Mana Saja
+						</h2>
+						<p class="font-body-md text-on-surface-variant">
+							Akses penuh melalui PC Workstation, Tablet, hingga
+							Smartphone. Mendukung Windows, iOS, dan Android
+							tanpa instalasi tambahan.
+						</p>
+					</div>
+					<div
+						class="grid grid-cols-2 md:grid-cols-4 gap-gutter pt-md"
+					>
+						<div
+							class="flex flex-col items-center p-md space-y-sm grayscale hover:grayscale-0 transition-all"
+						>
+							<span
+								class="material-symbols-outlined text-[48px] text-secondary"
+								>desktop_windows</span
+							>
+							<span class="font-label-md text-primary"
+								>Windows</span
+							>
+						</div>
+						<div
+							class="flex flex-col items-center p-md space-y-sm grayscale hover:grayscale-0 transition-all"
+						>
+							<span
+								class="material-symbols-outlined text-[48px] text-secondary"
+								>tablet_mac</span
+							>
+							<span class="font-label-md text-primary"
+								>Apple iOS</span
+							>
+						</div>
+						<div
+							class="flex flex-col items-center p-md space-y-sm grayscale hover:grayscale-0 transition-all"
+						>
+							<span
+								class="material-symbols-outlined text-[48px] text-secondary"
+								>phone_android</span
+							>
+							<span class="font-label-md text-primary"
+								>Android</span
+							>
+						</div>
+						<div
+							class="flex flex-col items-center p-md space-y-sm grayscale hover:grayscale-0 transition-all"
+						>
+							<span
+								class="material-symbols-outlined text-[48px] text-secondary"
+								>language</span
+							>
+							<span class="font-label-md text-primary"
+								>Web Browser</span
+							>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Definitions & Benefits -->
+			<section class="py-xl max-w-7xl mx-auto px-6 reveal-item">
+				<div
+					class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center"
+				>
+					<div class="rounded-xl overflow-hidden shadow-xl">
+						<img
+							class="w-full aspect-video object-cover"
+							data-alt="A macro shot of laboratory analytical software on a sleek, high-resolution monitor. The screen displays complex diagnostic graphs, patient data tables, and medical icons in a clean, blue-themed user interface. Soft ambient light from the laboratory environment creates a focused, professional atmosphere highlighting the software's accuracy and modern design."
+							src="laptop.png"
+						/>
+					</div>
+					<div class="space-y-md">
+						<h2 class="font-h1 text-primary">
+							Mengenal LIS Lebih Dekat
+						</h2>
+						<p class="font-body-md text-on-surface-variant">
+							LIS (Laboratory Information System) adalah perangkat
+							lunak yang dirancang khusus untuk mengelola
+							operasional laboratorium klinik secara otomatis.
+							Mulai dari pendaftaran, proses analisis, hingga
+							pelaporan hasil yang akurat.
+						</p>
+						<div class="space-y-sm pt-base">
+							<div class="flex items-center gap-sm">
+								<span
+									class="material-symbols-outlined text-secondary font-bold"
+									>check_circle</span
+								>
+								<span class="font-body-md font-medium"
+									>Layanan Cepat, Tepat, Akurat</span
+								>
+							</div>
+							<div class="flex items-center gap-sm">
+								<span
+									class="material-symbols-outlined text-secondary font-bold"
+									>check_circle</span
+								>
+								<span class="font-body-md font-medium"
+									>Monitoring Hasil Secara Real-time</span
+								>
+							</div>
+							<div class="flex items-center gap-sm">
+								<span
+									class="material-symbols-outlined text-secondary font-bold"
+									>check_circle</span
+								>
+								<span class="font-body-md font-medium"
+									>Meminimalkan Human Error Signifikan</span
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Documentation Section -->
+			<section class="py-xl bg-primary-container relative reveal-item">
+				<div class="absolute inset-0 opacity-10">
+					<div
+						class="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-secondary to-transparent"
+					></div>
+				</div>
+				<div class="max-w-7xl mx-auto px-6 relative z-10">
+					<div class="text-center mb-xl">
+						<h2 class="font-h1 text-white">Dokumentasi ABC-LIS</h2>
+						<p class="font-body-md text-blue-100/80 mt-sm">
+							Galeri implementasi sistem laboratorium modern
+						</p>
+					</div>
+					<div class="flex items-center justify-end gap-3 mb-5">
+						<button id="doc-prev" class="doc-nav text-white px-4 py-2 rounded-lg hover:bg-white/25 transition">Prev</button>
+						<button id="doc-next" class="doc-nav text-white px-4 py-2 rounded-lg hover:bg-white/25 transition">Next</button>
+					</div>
+					<div id="doc-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					</div>
+				</div>
+			</section>
+			<!-- Core Features -->
+			<section class="py-xl max-w-7xl mx-auto px-6 reveal-item" id="features">
+				<div class="text-center mb-xl">
+					<h2 class="font-h1 text-primary">FITUR UTAMA</h2>
+					<div
+						class="h-1 w-20 bg-secondary-container mx-auto mt-sm"
+					></div>
+				</div>
+				<div
+					class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter"
+				>
+					<!-- Card 1 -->
+					<div
+						class="bg-white p-6 rounded-xl border border-blue-50 shadow-sm hover:shadow-md transition-all group"
+					>
+						<div
+							class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-secondary group-hover:text-white transition-colors"
+						>
+							<span class="material-symbols-outlined"
+								>person_add</span
+							>
+						</div>
+						<h3 class="font-h3 text-primary mb-sm">
+							Manajemen Pasien
+						</h3>
+						<p class="font-body-sm text-on-surface-variant">
+							Pendaftaran pasien terintegrasi, cetak label barcode
+							otomatis, dan tracking status sampel real-time.
+						</p>
+					</div>
+					<!-- Card 2 -->
+					<div
+						class="bg-white p-6 rounded-xl border border-blue-50 shadow-sm hover:shadow-md transition-all group"
+					>
+						<div
+							class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-secondary group-hover:text-white transition-colors"
+						>
+							<span class="material-symbols-outlined"
+								>verified_user</span
+							>
+						</div>
+						<h3 class="font-h3 text-primary mb-sm">
+							Validasi Hasil
+						</h3>
+						<p class="font-body-sm text-on-surface-variant">
+							Sistem verifikasi berjenjang oleh dokter atau analis
+							laboratorium untuk akurasi diagnosa.
+						</p>
+					</div>
+					<!-- Card 3 -->
+					<div
+						class="bg-white p-6 rounded-xl border border-blue-50 shadow-sm hover:shadow-md transition-all group"
+					>
+						<div
+							class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-secondary group-hover:text-white transition-colors"
+						>
+							<span class="material-symbols-outlined"
+								>settings_input_component</span
+							>
+						</div>
+						<h3 class="font-h3 text-primary mb-sm">
+							Integrasi Alat
+						</h3>
+						<p class="font-body-sm text-on-surface-variant">
+							Auto-sync dengan hematology, chemistry analyzers,
+							dan alat imunologi terkemuka.
+						</p>
+					</div>
+					<!-- Card 4 -->
+					<div
+						class="bg-white p-6 rounded-xl border border-blue-50 shadow-sm hover:shadow-md transition-all group"
+					>
+						<div
+							class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-secondary group-hover:text-white transition-colors"
+						>
+							<span class="material-symbols-outlined"
+								>analytics</span
+							>
+						</div>
+						<h3 class="font-h3 text-primary mb-sm">
+							Pelaporan &amp; Statistik
+						</h3>
+						<p class="font-body-sm text-on-surface-variant">
+							Integrasi SIMRS, template kustom, dan notifikasi
+							nilai kritis (critical values).
+						</p>
+					</div>
+				</div>
+			</section>
+			<!-- Aftersales Service -->
+			<section
+				class="py-xl bg-slate-900 text-white overflow-hidden relative reveal-item"
+				id="aftersales"
+			>
+				<div
+					class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-xl items-center relative z-10"
+				>
+					<div class="space-y-lg">
+						<h2 class="font-h1 text-white">Dukungan Purna Jual</h2>
+						<div class="grid grid-cols-1 gap-md">
+							<div class="flex gap-md">
+								<div
+									class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center"
+								>
+									<span
+										class="material-symbols-outlined text-secondary"
+										>bolt</span
+									>
+								</div>
+								<div>
+									<h4 class="font-h3 mb-xs">
+										Fast Response Support
+									</h4>
+									<p class="font-body-sm text-blue-100/60">
+										Tim teknis responsif siap menangani
+										kendala operasional dalam waktu singkat.
+									</p>
+								</div>
+							</div>
+							<div class="flex gap-md">
+								<div
+									class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center"
+								>
+									<span
+										class="material-symbols-outlined text-secondary"
+										>update</span
+									>
+								</div>
+								<div>
+									<h4 class="font-h3 mb-xs">
+										Regular Updates
+									</h4>
+									<p class="font-body-sm text-blue-100/60">
+										Pembaruan fitur dan keamanan sistem
+										secara berkala tanpa biaya tambahan.
+									</p>
+								</div>
+							</div>
+							<div class="flex gap-md">
+								<div
+									class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center"
+								>
+									<span
+										class="material-symbols-outlined text-secondary"
+										>support_agent</span
+									>
+								</div>
+								<div>
+									<h4 class="font-h3 mb-xs">
+										24/7 Remote Technical
+									</h4>
+									<p class="font-body-sm text-blue-100/60">
+										Dukungan remote standby untuk memastikan
+										kelancaran operasional laboratorium 24
+										jam.
+									</p>
+								</div>
+							</div>
+							<div class="flex gap-md">
+								<div
+									class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center"
+								>
+									<span
+										class="material-symbols-outlined text-secondary"
+										>verified</span
+									>
+								</div>
+								<div>
+									<h4 class="font-h3 mb-xs">
+										Lifetime Warranty
+									</h4>
+									<p class="font-body-sm text-blue-100/60">
+										Garansi sistem seumur hidup selama masa
+										penggunaan aktif untuk ketenangan Anda.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="relative">
+						<img
+							class="rounded-2xl shadow-2xl"
+							data-alt="A professional medical technology support team in a clean, modern office environment. They are equipped with high-end headsets and multiple monitors showing laboratory management dashboards. The lighting is bright and corporate, emphasizing a professional, reliable, and technologically advanced support structure with a soft UI blue aesthetic."
+							src="customer-service.png"
+						/>
+						<div
+							class="absolute -bottom-6 -right-6 glass-card p-6 rounded-xl hidden md:block"
+						>
+							<div class="text-primary font-bold text-h1">
+								24/7
+							</div>
+							<div class="text-on-surface-variant font-label-md">
+								Support Standby
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<!-- Footer -->
+		<section class="py-xl bg-surface-container-low reveal-item" id="contact">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="text-center mb-xl">
+					<h2 class="font-h1 text-primary uppercase tracking-tight">
+						Konsultasi Gratis Sekarang
+					</h2>
+					<div
+						class="h-1 w-20 bg-secondary-container mx-auto mt-sm"
+					></div>
+				</div>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl">
+					<!-- Contact Form -->
+					<div
+						class="bg-white p-8 rounded-2xl shadow-sm border border-blue-100"
+					>
+						<form class="space-y-md">
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+								<div class="space-y-xs">
+									<label class="font-label-md text-primary"
+										>Nama Lengkap</label
+									>
+									<input
+										class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all"
+										placeholder="Masukkan nama Anda"
+										type="text"
+									/>
+								</div>
+								<div class="space-y-xs">
+									<label class="font-label-md text-primary"
+										>Nama RS / Laboratorium</label
+									>
+									<input
+										class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all"
+										placeholder="Nama Instansi"
+										type="text"
+									/>
+								</div>
+							</div>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+								<div class="space-y-xs">
+									<label class="font-label-md text-primary"
+										>Email</label
+									>
+									<input
+										class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all"
+										placeholder="email@domain.com"
+										type="email"
+									/>
+								</div>
+								<div class="space-y-xs">
+									<label class="font-label-md text-primary"
+										>Nomor Telepon</label
+									>
+									<input
+										class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all"
+										placeholder="Contoh: 08123456789"
+										type="tel"
+									/>
+								</div>
+							</div>
+							<div class="space-y-xs">
+								<label class="font-label-md text-primary"
+									>Pesan Anda</label
+								>
+								<textarea
+									class="w-full px-4 py-3 rounded-lg border border-blue-100 focus:ring-2 focus:ring-secondary-container focus:border-secondary-container outline-none transition-all resize-none"
+									placeholder="Tuliskan kebutuhan atau pertanyaan Anda..."
+									rows="4"
+								></textarea>
+							</div>
+							<button
+								class="w-full bg-secondary text-white py-4 rounded-lg font-h3 hover:bg-on-tertiary-fixed-variant transition-colors shadow-lg shadow-secondary/20"
+								type="submit"
+							>
+								Kirim Pesan
+							</button>
+						</form>
+					</div>
+					<!-- Contact Info -->
+					<div
+						class="flex flex-col justify-center space-y-xl lg:pl-12"
+					>
+						<div class="space-y-md">
+							<h3 class="font-h2 text-primary">Hubungi Kami</h3>
+							<p class="font-body-md text-on-surface-variant">
+								Tim kami siap membantu Anda memberikan solusi
+								terbaik untuk kebutuhan sistem informasi
+								laboratorium Anda.
+							</p>
+						</div>
+						<div class="space-y-md">
+							<div class="flex items-start gap-md">
+								<div
+									class="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-secondary"
+								>
+									<span class="material-symbols-outlined"
+										>location_on</span
+									>
+								</div>
+								<div>
+									<h4 class="font-h3 text-primary">
+										Kantor Pusat
+									</h4>
+									<p
+										class="font-body-sm text-on-surface-variant"
+									>
+										Jl. Pendidikan No. 123, Jakarta Selatan,
+										Indonesia
+									</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-md">
+								<div
+									class="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-secondary"
+								>
+									<span class="material-symbols-outlined"
+										>call</span
+									>
+								</div>
+								<div>
+									<h4 class="font-h3 text-primary">
+										Telepon &amp; WhatsApp
+									</h4>
+									<p
+										class="font-body-sm text-on-surface-variant"
+									>
+										+62 (21) 1234-5678<br />+62
+										812-3456-7890 (Customer Support)
+									</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-md">
+								<div
+									class="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-secondary"
+								>
+									<span class="material-symbols-outlined"
+										>mail</span
+									>
+								</div>
+								<div>
+									<h4 class="font-h3 text-primary">
+										Email Resmi
+									</h4>
+									<p
+										class="font-body-sm text-on-surface-variant"
+									>
+										info@abclis.com<br />support@abclis.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer
+			class="bg-slate-50 dark:bg-slate-950 text-sm leading-relaxed w-full border-t border-blue-100 dark:border-slate-800 reveal-item"
+		>
+			<div
+				class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full px-6 py-12 max-w-7xl mx-auto"
+			>
+				<div class="col-span-1 md:col-span-2 space-y-md">
+					<div class="brand-badge">
+						<img class="logo-default" src="logo.png" alt="ABC LIS" />
+					</div>
+					<p class="text-slate-500 dark:text-slate-400 max-w-sm">
+						© 2024 ABC Laboratory Information Systems. Precision in
+						Diagnostics by PT. ANUGRAH BINTANG CENDANA.
+					</p>
+				</div>
+				<div class="space-y-md">
+					<h4 class="font-h3 text-blue-900 dark:text-blue-400">
+						Quick Links
+					</h4>
+					<ul class="space-y-sm">
+						<li>
+							<a
+								class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 underline underline-offset-4 transition-all duration-150"
+								href="#"
+								>Privacy Policy</a
+							>
+						</li>
+						<li>
+							<a
+								class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 underline underline-offset-4 transition-all duration-150"
+								href="#"
+								>Terms of Service</a
+							>
+						</li>
+						<li>
+							<a
+								class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 underline underline-offset-4 transition-all duration-150"
+								href="#"
+								>Documentation</a
+							>
+						</li>
+					</ul>
+				</div>
+				<div class="space-y-md">
+					<h4 class="font-h3 text-blue-900 dark:text-blue-400">
+						Support
+					</h4>
+					<ul class="space-y-sm">
+						<li>
+							<a
+								class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 underline underline-offset-4 transition-all duration-150"
+								href="#"
+								>API Reference</a
+							>
+						</li>
+						<li>
+							<a
+								class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 underline underline-offset-4 transition-all duration-150"
+								href="#"
+								>Contact Support</a
+							>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+		<div id="image-modal" class="image-modal" aria-hidden="true">
+			<div class="image-modal-panel">
+				<button id="image-modal-prev" class="image-modal-arrow left" type="button" aria-label="Sebelumnya">‹</button>
+				<button id="image-modal-next" class="image-modal-arrow right" type="button" aria-label="Berikutnya">›</button>
+				<button id="image-modal-close" class="image-modal-close" type="button" aria-label="Tutup">×</button>
+				<img id="image-modal-preview" src="" alt="Preview Dokumentasi" />
+			</div>
+		</div>
+		<script>
+			const revealItems = document.querySelectorAll(".reveal-item");
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("visible");
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.16 }
+			);
+			revealItems.forEach((item) => observer.observe(item));
+
+			const typeTargets = document.querySelectorAll("[data-type-text]");
+			typeTargets.forEach((el) => {
+				const text = el.getAttribute("data-type-text") || "";
+				const startDelay = Number(el.getAttribute("data-type-delay") || 0);
+				const typeSpeed = Number(el.getAttribute("data-type-speed") || 70);
+				const deleteSpeed = Number(el.getAttribute("data-delete-speed") || 40);
+				const holdDelay = Number(el.getAttribute("data-hold-delay") || 1200);
+				let index = 0;
+				let deleting = false;
+
+				const tick = () => {
+					if (!deleting) {
+						index = Math.min(index + 1, text.length);
+					} else {
+						index = Math.max(index - 1, 0);
+					}
+
+					el.textContent = text.slice(0, index);
+
+					if (!deleting && index === text.length) {
+						deleting = true;
+						setTimeout(tick, holdDelay);
+						return;
+					}
+
+					if (deleting && index === 0) {
+						deleting = false;
+						setTimeout(tick, 250);
+						return;
+					}
+
+					setTimeout(tick, deleting ? deleteSpeed : typeSpeed);
+				};
+
+				setTimeout(tick, startDelay);
+			});
+
+			const heroSection = document.getElementById("specifications");
+			const heroParallax = document.getElementById("hero-parallax");
+			const applyParallax = () => {
+				if (!heroSection || !heroParallax) return;
+				const rect = heroSection.getBoundingClientRect();
+				const speed = 0.22;
+				const offset = Math.max(-140, Math.min(140, -rect.top * speed));
+				heroParallax.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+			};
+			window.addEventListener("scroll", applyParallax, { passive: true });
+			applyParallax();
+
+			const docImages = [
+				"https://images.pexels.com/photos/3825527/pexels-photo-3825527.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/5726709/pexels-photo-5726709.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/7088524/pexels-photo-7088524.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/7579828/pexels-photo-7579828.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/3825371/pexels-photo-3825371.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/8442040/pexels-photo-8442040.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg?auto=compress&cs=tinysrgb&w=1200",
+			];
+			const docGrid = document.getElementById("doc-grid");
+			const docPrev = document.getElementById("doc-prev");
+			const docNext = document.getElementById("doc-next");
+			const imageModal = document.getElementById("image-modal");
+			const imageModalPreview = document.getElementById("image-modal-preview");
+			const imageModalClose = document.getElementById("image-modal-close");
+			const imageModalPrev = document.getElementById("image-modal-prev");
+			const imageModalNext = document.getElementById("image-modal-next");
+			const pageSize = 6;
+			let docPage = 0;
+			let activeImageIndex = 0;
+
+			const openModalByIndex = (imageIndex) => {
+				if (!imageModal || !imageModalPreview) return;
+				activeImageIndex = (imageIndex + docImages.length) % docImages.length;
+				imageModalPreview.src = docImages[activeImageIndex];
+				imageModalPreview.alt = `Dokumentasi Laboratorium ${activeImageIndex + 1}`;
+				imageModal.classList.add("active");
+				document.body.style.overflow = "hidden";
+			};
+
+			const renderDocPage = () => {
+				if (!docGrid) return;
+				const start = docPage * pageSize;
+				const chunk = docImages.slice(start, start + pageSize);
+				docGrid.innerHTML = chunk
+					.map(
+						(src, i) => `
+						<div class="doc-card rounded-2xl overflow-hidden" data-doc-index="${start + i}">
+							<img class="doc-image" src="${src}" alt="Dokumentasi Laboratorium ${start + i + 1}" />
+						</div>
+					`
+					)
+					.join("");
+
+				docGrid.querySelectorAll(".doc-card").forEach((card) => {
+					card.addEventListener("click", () => {
+						const cardIndex = Number(card.getAttribute("data-doc-index") || "0");
+						openModalByIndex(cardIndex);
+					});
+				});
+			};
+			const totalPages = Math.ceil(docImages.length / pageSize);
+			docPrev?.addEventListener("click", () => {
+				docPage = (docPage - 1 + totalPages) % totalPages;
+				renderDocPage();
+			});
+			docNext?.addEventListener("click", () => {
+				docPage = (docPage + 1) % totalPages;
+				renderDocPage();
+			});
+			setInterval(() => {
+				docPage = (docPage + 1) % totalPages;
+				renderDocPage();
+			}, 5000);
+			renderDocPage();
+
+			imageModalClose?.addEventListener("click", () => {
+				if (!imageModal) return;
+				imageModal.classList.remove("active");
+				document.body.style.overflow = "";
+			});
+			imageModalPrev?.addEventListener("click", (event) => {
+				event.stopPropagation();
+				openModalByIndex(activeImageIndex - 1);
+			});
+			imageModalNext?.addEventListener("click", (event) => {
+				event.stopPropagation();
+				openModalByIndex(activeImageIndex + 1);
+			});
+			imageModal?.addEventListener("click", (event) => {
+				if (event.target !== imageModal) return;
+				imageModal.classList.remove("active");
+				document.body.style.overflow = "";
+			});
+			window.addEventListener("keydown", (event) => {
+				if (!imageModal?.classList.contains("active")) return;
+				if (event.key === "Escape") {
+					imageModal.classList.remove("active");
+					document.body.style.overflow = "";
+				}
+				if (event.key === "ArrowLeft") {
+					openModalByIndex(activeImageIndex - 1);
+				}
+				if (event.key === "ArrowRight") {
+					openModalByIndex(activeImageIndex + 1);
+				}
+			});
+		</script>
+	</body>
+</html>
+
+
