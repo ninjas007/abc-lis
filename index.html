@@ -1110,7 +1110,7 @@
 					<h2 class="font-h1 text-primary uppercase tracking-tight">Alat Terintegrasi</h2>
 					<div class="h-1 w-20 bg-secondary-container mx-auto mt-sm"></div>
 					<p class="mt-4 text-on-surface-variant max-w-2xl mx-auto">
-						Kompatibel dengan berbagai analyzer laboratorium. Custom integration .
+						Kompatibel dengan berbagai analyzer laboratorium. Custom integration untuk alat laboratorium Anda dengan protokol komunikasi standar industri.
 					</p>
 				</div>
 				<div class="alat-shell">
@@ -1611,6 +1611,7 @@
 			const alatNext = document.getElementById("alat-next");
 			let alatIndex = 0;
 			let alatAutoSlide;
+			const alatAutoplayEnabled = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 			let alatPointerStartX = 0;
 			let alatPointerEndX = 0;
 			let alatIsPointerDown = false;
@@ -1672,6 +1673,7 @@
 
 			const startAlatAutoSlide = () => {
 				clearInterval(alatAutoSlide);
+				if (!alatAutoplayEnabled) return;
 				alatAutoSlide = setInterval(() => slideAlat(1), 2800);
 			};
 
