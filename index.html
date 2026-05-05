@@ -485,6 +485,89 @@
 			.mobile-menu.open {
 				max-height: 320px;
 			}
+			.alat-shell {
+				position: relative;
+				perspective: 1200px;
+				min-height: 380px;
+			}
+			.alat-track {
+				position: relative;
+				height: 340px;
+				transform-style: preserve-3d;
+				touch-action: pan-y;
+			}
+			.alat-card {
+				position: absolute;
+				top: 0;
+				left: 50%;
+				width: min(560px, 82vw);
+				height: 340px;
+				border-radius: 22px;
+				overflow: hidden;
+				border: 1px solid rgba(179, 201, 255, 0.5);
+				background: #ffffff;
+				box-shadow: 0 20px 44px rgba(4, 32, 91, 0.18);
+				transform-style: preserve-3d;
+				transition:
+					transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1),
+					opacity 0.65s ease,
+					filter 0.65s ease,
+					box-shadow 0.65s ease;
+				will-change: transform, opacity;
+			}
+			.alat-card img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+			.alat-card::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					to top,
+					rgba(3, 15, 43, 0.45) 0%,
+					rgba(3, 15, 43, 0.08) 42%,
+					rgba(3, 15, 43, 0) 100%
+				);
+				pointer-events: none;
+			}
+			.alat-card .alat-caption {
+				position: absolute;
+				left: 20px;
+				right: 20px;
+				bottom: 18px;
+				z-index: 2;
+				color: #ffffff;
+				font-weight: 600;
+				text-shadow: 0 3px 16px rgba(0, 0, 0, 0.45);
+				font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+			}
+			.alat-nav {
+				width: 44px;
+				height: 44px;
+				border-radius: 999px;
+				border: 1px solid #bfd5ff;
+				background: #ffffff;
+				color: #0d3f9f;
+				box-shadow: 0 10px 24px rgba(5, 45, 125, 0.15);
+				transition: transform 0.25s ease;
+			}
+			.alat-nav:hover {
+				transform: translateY(-2px);
+			}
+			@media (max-width: 768px) {
+				.alat-shell {
+					min-height: 300px;
+				}
+				.alat-track {
+					height: 270px;
+				}
+				.alat-card {
+					height: 270px;
+					border-radius: 18px;
+				}
+			}
 		</style>
 	</head>
 	<body class="bg-surface font-body-md text-on-surface antialiased">
@@ -1021,6 +1104,24 @@
 				</div>
 			</section>
 		</main>
+		<section class="py-xl bg-gradient-to-b from-[#eef4ff] via-[#f8fbff] to-[#ffffff] reveal-item" id="alat">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="text-center mb-10">
+					<h2 class="font-h1 text-primary uppercase tracking-tight">Alat Terintegrasi</h2>
+					<div class="h-1 w-20 bg-secondary-container mx-auto mt-sm"></div>
+					<p class="mt-4 text-on-surface-variant max-w-2xl mx-auto">
+						Kompatibel dengan berbagai analyzer laboratorium. Slide berjalan otomatis ke kiri dan bisa Anda kontrol manual.
+					</p>
+				</div>
+				<div class="alat-shell">
+					<div id="alat-track" class="alat-track"></div>
+				</div>
+				<div class="mt-6 flex items-center justify-center gap-3">
+					<button id="alat-prev" class="alat-nav" type="button" aria-label="Alat Sebelumnya">‹</button>
+					<button id="alat-next" class="alat-nav" type="button" aria-label="Alat Berikutnya">›</button>
+				</div>
+			</div>
+		</section>
 		<!-- Footer -->
 		<section class="py-xl bg-surface-container-low reveal-item" id="contact">
 			<div class="max-w-7xl mx-auto px-6">
@@ -1138,8 +1239,8 @@
 									<p
 										class="font-body-sm text-on-surface-variant"
 									>
-										Jl. Pendidikan No. 123, Jakarta Selatan,
-										Indonesia
+										Jl. Penkase No.38, Alak, Kec. Alak, Kota
+										Kupang, Nusa Tenggara Tim.
 									</p>
 								</div>
 							</div>
@@ -1158,8 +1259,8 @@
 									<p
 										class="font-body-sm text-on-surface-variant"
 									>
-										+62 (21) 1234-5678<br />+62
-										812-3456-7890 (Customer Support)
+										+62 812-3310-7449<br />+62
+										821-4400-8599 (Customer Support)
 									</p>
 								</div>
 							</div>
@@ -1178,7 +1279,7 @@
 									<p
 										class="font-body-sm text-on-surface-variant"
 									>
-										info@abclis.com<br />support@abclis.com
+										anugrahbintangcendana@gmail.com
 									</p>
 								</div>
 							</div>
@@ -1344,18 +1445,26 @@
 			applyParallax();
 
 			const docImages = [
-				"https://images.pexels.com/photos/3825527/pexels-photo-3825527.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/5726709/pexels-photo-5726709.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/7088524/pexels-photo-7088524.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/7579828/pexels-photo-7579828.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/3825371/pexels-photo-3825371.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/8442040/pexels-photo-8442040.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&w=1200",
-				"https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg?auto=compress&cs=tinysrgb&w=1200",
+				"images/training/454387f8-7ce9-40b7-bb12-4237d79cbc35.jfif",
+				"images/training/IMG-20250807-WA0040.jpg",
+				"images/training/IMG-20250929-WA0055.jpg",
+				"images/training/IMG-20260204-WA0027.jpg",
+				"images/training/IMG-20260211-WA0067.jpg",
+				"images/training/IMG-20260423-WA0051.jpg",
+				"images/training/IMG_20230303_135723.jpg",
+				"images/training/IMG_20230303_140114.jpg",
+				"images/training/IMG_20230508_135622.jpg",
+				"images/training/IMG_20250226_124818.jpg",
+				"images/training/MVIMG_20240708_105802.jpg",
+				"images/training/MVIMG_20240708_105808.jpg",
+				"images/training/PXL_20230523_132738131.jpg",
+				"images/training/PXL_20230703_133515204.jpg",
+				"images/training/Screenshot_2025-10-01-18-51-24-901_com.google.android.apps.photos.jpg",
+				"images/training/Screenshot_2026-05-03-08-05-14-173_com.anydesk.anydeskandroid.jpg",
+				"images/training/Screenshot_2026-05-03-08-07-52-623_com.anydesk.anydeskandroid.jpg",
+				"images/training/Screenshot_2026-05-03-09-18-58-670_com.anydesk.anydeskandroid.jpg",
+				"images/training/Screenshot_2026-05-04-23-27-44-421_com.google.android.apps.photos.jpg",
+				"images/training/Screenshot_2026-05-04-23-29-23-408_com.google.android.apps.photos.jpg",
 			];
 			const docGrid = document.getElementById("doc-grid");
 			const docPrev = document.getElementById("doc-prev");
@@ -1368,12 +1477,24 @@
 			const pageSize = 6;
 			let docPage = 0;
 			let activeImageIndex = 0;
+			let activeModalImages = docImages;
+			let modalTouchStartX = 0;
+			let modalTouchEndX = 0;
+			const trainingCacheVersion = "20260505";
+			const withCacheBust = (src) => `${src}?v=${trainingCacheVersion}`;
 
-			const openModalByIndex = (imageIndex) => {
+			const closeImageModal = () => {
+				if (!imageModal) return;
+				imageModal.classList.remove("active");
+				document.body.style.overflow = "";
+			};
+
+			const openModalByIndex = (imageIndex, images = docImages, label = "Dokumentasi Laboratorium") => {
 				if (!imageModal || !imageModalPreview) return;
-				activeImageIndex = (imageIndex + docImages.length) % docImages.length;
-				imageModalPreview.src = docImages[activeImageIndex];
-				imageModalPreview.alt = `Dokumentasi Laboratorium ${activeImageIndex + 1}`;
+				activeModalImages = images;
+				activeImageIndex = (imageIndex + activeModalImages.length) % activeModalImages.length;
+				imageModalPreview.src = withCacheBust(activeModalImages[activeImageIndex]);
+				imageModalPreview.alt = `${label} ${activeImageIndex + 1}`;
 				imageModal.classList.add("active");
 				document.body.style.overflow = "hidden";
 			};
@@ -1386,7 +1507,7 @@
 					.map(
 						(src, i) => `
 						<div class="doc-card rounded-2xl overflow-hidden" data-doc-index="${start + i}">
-							<img class="doc-image" src="${src}" alt="Dokumentasi Laboratorium ${start + i + 1}" />
+							<img class="doc-image" src="${withCacheBust(src)}" alt="Dokumentasi Laboratorium ${start + i + 1}" />
 						</div>
 					`
 					)
@@ -1395,7 +1516,7 @@
 				docGrid.querySelectorAll(".doc-card").forEach((card) => {
 					card.addEventListener("click", () => {
 						const cardIndex = Number(card.getAttribute("data-doc-index") || "0");
-						openModalByIndex(cardIndex);
+						openModalByIndex(cardIndex, docImages, "Dokumentasi Laboratorium");
 					});
 				});
 			};
@@ -1414,37 +1535,44 @@
 			}, 5000);
 			renderDocPage();
 
-			imageModalClose?.addEventListener("click", () => {
-				if (!imageModal) return;
-				imageModal.classList.remove("active");
-				document.body.style.overflow = "";
-			});
+			imageModalClose?.addEventListener("click", closeImageModal);
 			imageModalPrev?.addEventListener("click", (event) => {
 				event.stopPropagation();
-				openModalByIndex(activeImageIndex - 1);
+				openModalByIndex(activeImageIndex - 1, activeModalImages);
 			});
 			imageModalNext?.addEventListener("click", (event) => {
 				event.stopPropagation();
-				openModalByIndex(activeImageIndex + 1);
+				openModalByIndex(activeImageIndex + 1, activeModalImages);
 			});
 			imageModal?.addEventListener("click", (event) => {
 				if (event.target !== imageModal) return;
-				imageModal.classList.remove("active");
-				document.body.style.overflow = "";
+				closeImageModal();
 			});
 			window.addEventListener("keydown", (event) => {
 				if (!imageModal?.classList.contains("active")) return;
 				if (event.key === "Escape") {
-					imageModal.classList.remove("active");
-					document.body.style.overflow = "";
+					closeImageModal();
 				}
 				if (event.key === "ArrowLeft") {
-					openModalByIndex(activeImageIndex - 1);
+					openModalByIndex(activeImageIndex - 1, activeModalImages);
 				}
 				if (event.key === "ArrowRight") {
-					openModalByIndex(activeImageIndex + 1);
+					openModalByIndex(activeImageIndex + 1, activeModalImages);
 				}
 			});
+			imageModalPreview?.addEventListener("touchstart", (event) => {
+				modalTouchStartX = event.changedTouches[0].clientX;
+			}, { passive: true });
+			imageModalPreview?.addEventListener("touchend", (event) => {
+				modalTouchEndX = event.changedTouches[0].clientX;
+				const distance = modalTouchEndX - modalTouchStartX;
+				if (Math.abs(distance) < 50) return;
+				if (distance < 0) {
+					openModalByIndex(activeImageIndex + 1, activeModalImages);
+				} else {
+					openModalByIndex(activeImageIndex - 1, activeModalImages);
+				}
+			}, { passive: true });
 
 			const consultationForm = document.getElementById("consultation-form");
 			consultationForm?.addEventListener("submit", (event) => {
@@ -1466,6 +1594,158 @@
 
 				window.open(`https://wa.me/${whatsappNumber}?text=${whatsappText}`, "_blank");
 			});
+
+			const alatImages = [
+				{ src: "images/alat/ANALYZER ALIFAX ROLLER 20 MC ESR.jpg", title: "Analyzer Alifax Roller 20 MC ESR" },
+				{ src: "images/alat/ANALYZER AUTOMATIC A15 COOLING KIMIA DARAH.jpg", title: "Analyzer Automatic A15 Cooling Kimia Darah" },
+				{ src: "images/alat/ANALYZER FULL AUTOMATIC BA200 KIMIA DARAH.jpg", title: "Analyzer Full Automatic BA200 Kimia Darah" },
+				{ src: "images/alat/ANALYZER FULL AUTOMATIC BA400 KIMIA DARAH_.jpg", title: "Analyzer Full Automatic BA400 Kimia Darah" },
+				{ src: "images/alat/ANALYZER HEMATOLOGI MINDRAY BC 720.jpg", title: "Analyzer Hematologi Mindray BC 720" },
+				{ src: "images/alat/ANALYZER HEMATOLOGI SWELAB ALFA 3 DIFF.jpg", title: "Analyzer Hematologi Swelab Alfa 3 Diff" },
+				{ src: "images/alat/ANALYZER HEMATOLOGI SWELAB LUMI 5 DIFF.jpg", title: "Analyzer Hematologi Swelab Lumi 5 Diff" },
+				{ src: "images/alat/ANALYZER SEMI BTS NEW KIMIA DARAH.png", title: "Analyzer Semi BTS New Kimia Darah" },
+				{ src: "images/alat/ANALYZER URINE VERIFY U120.jpg", title: "Analyzer Urine Verify U120" },
+			];
+			const alatTrack = document.getElementById("alat-track");
+			const alatPrev = document.getElementById("alat-prev");
+			const alatNext = document.getElementById("alat-next");
+			let alatIndex = 0;
+			let alatAutoSlide;
+			let alatPointerStartX = 0;
+			let alatPointerEndX = 0;
+			let alatIsPointerDown = false;
+			let alatDidDrag = false;
+
+			const createAlatCards = () => {
+				if (!alatTrack) return;
+				alatTrack.innerHTML = alatImages
+					.map(
+						(item, idx) => `
+							<div class="alat-card" data-alat-index="${idx}">
+								<img src="${item.src}" alt="${item.title}" loading="lazy" />
+								<div class="alat-caption">${item.title}</div>
+							</div>
+						`
+					)
+					.join("");
+			};
+
+			const wrapIndex = (value, total) => ((value % total) + total) % total;
+
+			const updateAlatCarousel = () => {
+				if (!alatTrack) return;
+				const cards = alatTrack.querySelectorAll(".alat-card");
+				const total = cards.length;
+				if (!total) return;
+
+				cards.forEach((card, idx) => {
+					const offsetRaw = idx - alatIndex;
+					let offset = offsetRaw;
+					if (offset > total / 2) offset -= total;
+					if (offset < -total / 2) offset += total;
+
+					const absOffset = Math.abs(offset);
+					const x = offset * 220;
+					const z = -absOffset * 170;
+					const rotateY = offset * -17;
+					const scale = 1 - Math.min(absOffset, 3) * 0.14;
+					const opacity = absOffset > 3 ? 0 : 1 - absOffset * 0.2;
+					const blur = absOffset > 0 ? absOffset * 0.4 : 0;
+					const shadow =
+						absOffset === 0
+							? "0 28px 58px rgba(4, 33, 96, 0.3)"
+							: "0 14px 30px rgba(4, 33, 96, 0.18)";
+
+					card.style.transform = `translateX(-50%) translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`;
+					card.style.opacity = String(opacity);
+					card.style.filter = `blur(${blur}px)`;
+					card.style.zIndex = String(100 - absOffset);
+					card.style.boxShadow = shadow;
+					card.style.pointerEvents = absOffset > 2 ? "none" : "auto";
+				});
+			};
+
+			const slideAlat = (step = 1) => {
+				alatIndex = wrapIndex(alatIndex + step, alatImages.length);
+				updateAlatCarousel();
+			};
+
+			const startAlatAutoSlide = () => {
+				clearInterval(alatAutoSlide);
+				alatAutoSlide = setInterval(() => slideAlat(1), 2800);
+			};
+
+			createAlatCards();
+			updateAlatCarousel();
+			startAlatAutoSlide();
+
+			const bindAlatCardActions = () => {
+				if (!alatTrack) return;
+				alatTrack.querySelectorAll(".alat-card").forEach((card) => {
+					card.addEventListener("click", () => {
+						if (alatDidDrag) {
+							alatDidDrag = false;
+							return;
+						}
+						const targetIndex = Number(card.getAttribute("data-alat-index") || "0");
+						const total = alatImages.length;
+						const direct = targetIndex - alatIndex;
+						const wrapped = direct > 0 ? direct - total : direct + total;
+						const shortest = Math.abs(direct) <= Math.abs(wrapped) ? direct : wrapped;
+						if (Math.abs(shortest) <= 1) {
+							alatIndex = wrapIndex(targetIndex, alatImages.length);
+							updateAlatCarousel();
+							openModalByIndex(alatIndex, alatImages.map((item) => item.src), "Alat");
+						} else {
+							slideAlat(shortest > 0 ? 1 : -1);
+						}
+						startAlatAutoSlide();
+					});
+				});
+			};
+			bindAlatCardActions();
+
+			alatNext?.addEventListener("click", () => {
+				slideAlat(1);
+				startAlatAutoSlide();
+			});
+			alatPrev?.addEventListener("click", () => {
+				slideAlat(-1);
+				startAlatAutoSlide();
+			});
+			alatTrack?.addEventListener("pointerdown", (event) => {
+				alatIsPointerDown = true;
+				alatDidDrag = false;
+				alatPointerStartX = event.clientX;
+				alatPointerEndX = event.clientX;
+				clearInterval(alatAutoSlide);
+			});
+			alatTrack?.addEventListener("pointermove", (event) => {
+				if (!alatIsPointerDown) return;
+				alatPointerEndX = event.clientX;
+				if (Math.abs(alatPointerEndX - alatPointerStartX) > 10) {
+					alatDidDrag = true;
+				}
+			});
+			alatTrack?.addEventListener("pointerup", () => {
+				if (!alatIsPointerDown) return;
+				alatIsPointerDown = false;
+				const distance = alatPointerEndX - alatPointerStartX;
+				if (Math.abs(distance) > 45) {
+					if (distance < 0) {
+						slideAlat(1);
+					} else {
+						slideAlat(-1);
+					}
+				}
+				startAlatAutoSlide();
+			});
+			alatTrack?.addEventListener("pointercancel", () => {
+				alatIsPointerDown = false;
+				startAlatAutoSlide();
+			});
+			alatTrack?.addEventListener("mouseenter", () => clearInterval(alatAutoSlide));
+			alatTrack?.addEventListener("mouseleave", startAlatAutoSlide);
 		</script>
 	</body>
 </html>
